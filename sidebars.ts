@@ -1,44 +1,74 @@
-import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
-/**
- * Creating a sidebar enables you to:
- - create an ordered group of docs
- - render a sidebar for each doc of that group
- - provide next/previous navigation
-
- The sidebars can be generated from the filesystem, or explicitly defined here.
-
- Create as many sidebars as you want.
- */
-const sidebars: SidebarsConfig = {
-  // By default, Docusaurus generates a sidebar from the docs folder structure
-  tutorialSidebar: [
+module.exports = {
+  docsSidebar: [
     {
       type: 'category',
       label: 'Getting Started',
-      items: ['intro', 'setup', 'first-workflow'],
+      items: [
+        'intro',
+        'getting-started/account-setup',
+        'getting-started/dashboard',
+        'getting-started/first-workflow',
+      ],
     },
     {
       type: 'category',
-      label: 'Integrations',
-      items: ['slack', 'google-sheets', 'microsoft-teams'],
+      label: 'Nodes',
+      items: [
+        'nodes/overview',
+        'nodes/triggers/trigger-nodes',
+        'nodes/actions/action-nodes',
+        'nodes/logic/logic-nodes'
+      ],
     },
-  ]
-
-  // But you can create a sidebar manually
-  /*
-  tutorialSidebar: [
-    'intro',
-    'hello',
+    'edges',
     {
       type: 'category',
-      label: 'Tutorial',
-      items: ['tutorial-basics/create-a-document'],
+      label: 'Settings',
+      items: [
+        'settings/overview',
+        'settings/settings/planbilling',
+        'settings/settings/members',
+        'settings/settings/engine',
+        {
+          type: 'category',
+          label: 'Logs',
+          items: [
+            'settings/settings/logs-overview',
+            'settings/settings/logs/executed-runs',
+            'settings/settings/logs/dead-letter-queue',
+            'settings/settings/logs/blocked-egress',
+            'settings/settings/logs/change-history',
+          ],
+        },
+        'settings/settings/webhooks',
+        'settings/settings/secrets-api-keys',
+        'settings/settings/privacy',
+        'settings/settings/integrations',
+        'settings/settings/workflows',
+        'settings/settings/danger-zone'
+      ],
+    },
+    'profile/profile',
+    {
+      type: 'category',
+      label: 'Workflow Templates',
+      items: [
+        'templates/templates'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Workflow Authentication',
+      items: ['auth/api', 'auth/oauth'],
+    },
+    {
+      type: 'category',
+      label: 'Legal',
+      items: [
+        'billing/limits',
+        'legal/terms',
+        'legal/privacy'
+      ],
     },
   ],
-   */
 };
-
-export default sidebars;
