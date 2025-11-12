@@ -121,7 +121,6 @@ If **Enable Repeat** is active, the workflow will continue to execute based on y
 
 Each scheduled execution runs independently.  
 If a workflow is still running when the next scheduled time arrives, DSentr automatically skips that run to prevent overlapping executions.  
-You can view upcoming and completed runs from the **Run History** tab.
 
 ---
 

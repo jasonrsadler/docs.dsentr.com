@@ -17,7 +17,21 @@ module.exports = {
         'nodes/overview',
         'nodes/triggers/trigger-nodes',
         'nodes/actions/action-nodes',
-        'nodes/logic/logic-nodes'
+        'nodes/logic/logic-nodes',
+        {
+          type: 'category',
+          label: 'Action Nodes',
+          items: [
+            'nodes/action-nodes/overview',
+            {
+              type: 'category',
+              label: 'Email Nodes',
+              items: [
+                'nodes/action-nodes/sendgrid-node'
+              ]
+            }
+          ]
+        }
       ],
     },
     'edges',
