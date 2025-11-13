@@ -75,6 +75,32 @@ Changing the mappings later only affects which columns receive data—not where 
 
 This ensures your data remains orderly, consistent, and predictable across workflow runs.
 
+## Important Notes About Editing Your Sheet
+
+Google Sheets treats **cleared rows**, **deleted rows**, and **formatted rows** differently.  
+This affects where DSentr appends new data.
+
+When using the Google Sheets action node:
+
+- DSentr always appends to the **next empty row as Google Sheets defines it**, not necessarily the first row that *looks* empty.
+- Clearing the contents of a row **does not** make it empty.  
+  Sheets still counts it as part of the data range if it contains formatting, merged cells, or hidden metadata.
+- Deleting a row **does** shift the sheet upward.  
+  The next append will happen at the new bottom of the sheet.
+- Structural changes such as moving columns, inserting rows, or applying formatting to large row ranges can cause Google Sheets to reinterpret the “data region,” which influences where new rows land.
+
+## Recommended Practice
+
+To keep workflow inserts predictable:
+
+- Avoid clearing rows in the middle of the sheet. **Delete** them instead.
+- Avoid moving or restructuring columns after a workflow depends on a specific layout.
+- Avoid merged cells, conditional formatting applied to entire rows, or special formatting that spans many rows.
+- Keep automated sheets simple so Google’s append behavior stays consistent.
+
+These practices ensure that DSentr’s row appends occur exactly where you expect, even as the sheet grows over time.
+
+
 ---
 
 ## OAuth Permissions
