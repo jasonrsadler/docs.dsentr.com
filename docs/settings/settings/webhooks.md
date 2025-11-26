@@ -62,6 +62,17 @@ await fetch("https://api.dsentr.com/api/workflows/<workflow-id>/trigger/<token>"
 
 All examples use a simple JSON body. You can send any valid JSON structure; each key becomes a variable available inside your workflow.
 
+### Public endpoint and security model
+
+Webhook trigger URLs are publicly reachable and do not require authentication.  
+Security is enforced by the secret token embedded in the URL. Anyone in possession of this URL can trigger the workflow.
+
+If you require stronger security or your webhook is exposed to untrusted networks, enable **HMAC signing** (Workspace Plan).  
+HMAC ensures requests cannot be spoofed or tampered with, even if your URL is intercepted.
+
+Keep your webhook URL private. Rotate the token immediately if it may have been exposed.
+
+
 ### Enabling HMAC signatures (Workspace Plan only)
 
 For **Workspace Plans**, you can enable **HMAC verification** to ensure incoming webhook requests are genuine and haven’t been altered in transit.  
@@ -140,6 +151,17 @@ DSentr verifies that:
 * The computed HMAC matches the provided signature.
 
 Only valid, untampered requests proceed to trigger the workflow.
+
+### Rate limiting
+
+Webhook requests are subject to a global rate limit across all public endpoints.
+
+Default limits:
+* 5 requests per second sustained
+* Up to 20 requests in a burst
+
+If your sender exceeds these limits, DSentr returns **HTTP 429 Too Many Requests**.  
+Clients should implement retry or exponential backoff to avoid being rate-limited.
 
 ### Legacy format
 
@@ -222,6 +244,8 @@ Javascript:
   });
 ```
 
+The Webhooks HMAC feature adds signature validation and replay protection, ensuring only trusted, verifiable requests can trigger your workflows.
+
 ---
 
 Best practices
@@ -230,5 +254,5 @@ Best practices
 * Use a replay window of 60–300 seconds for balanced security and reliability.
 * Prefer header-based signatures instead of including values in the body.
 * Test webhook calls with the provided examples before connecting production integrations.
-
-The Webhooks HMAC feature adds signature validation and replay protection, ensuring only trusted, verifiable requests can trigger your workflows.
+* Implement retry with backoff to handle rate limiting (HTTP 429).
+* Use HMAC signing if your webhook endpoint is exposed to untrusted networks.
