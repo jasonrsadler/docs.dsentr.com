@@ -43,7 +43,8 @@ module.exports = {
             },
             'nodes/action-nodes/productivity/google-sheets-node',
             'nodes/action-nodes/web/http-request-node',
-            'nodes/action-nodes/utility/run-code'
+            'nodes/action-nodes/utility/run-code',
+            'nodes/action-nodes/logic/delay-node'
           ],
         }
       ],
